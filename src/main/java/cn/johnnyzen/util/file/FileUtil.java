@@ -1,5 +1,7 @@
 package cn.johnnyzen.util.file;
 
+import org.jsoup.Jsoup;
+
 import java.io.*;
 import java.util.logging.Logger;
 
@@ -17,6 +19,24 @@ public class FileUtil {
         out.write(file);
         out.flush();
         out.close();
+    }
+
+    /**
+     * 通过url获取一些远程(静态文件)
+     * + 前提：一般这些远程静态文件不防爬虫
+     * @param url
+     * @return
+     */
+    public static String readRemoteFile(String url){
+        logPrefix = "[FileUtil.readFile] ";
+        String text = null;
+        try {
+            text = Jsoup.connect(url).get().outerHtml();
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.warning(logPrefix+"Fail to load remote file!");
+        }
+        return text;
     }
 
     /**
