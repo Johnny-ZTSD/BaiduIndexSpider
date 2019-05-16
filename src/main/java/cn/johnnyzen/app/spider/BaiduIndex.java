@@ -26,6 +26,10 @@ public class BaiduIndex {
      */
     private int indexValue;
 
+    public BaiduIndex(){
+
+    }
+
     public BaiduIndex(String keyword, Calendar date, int indexValue) {
         this.keyword = keyword;
         this.date = date;

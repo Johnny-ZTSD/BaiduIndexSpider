@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  * @IDE: Created by IntelliJ IDEA.
@@ -24,6 +25,11 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class BaiduIndexService {
+    private static final Logger logger = Logger.getLogger(BaiduIndexService.class.getName());
+
+    //日志前缀字符串,方便通过日志定位程序
+    protected static String logPrefix = null;
+
     /**
      * 百度指数的首页(的详细)url
      * + 方便后续爬虫在业务流程中的逻辑判断
@@ -96,6 +102,7 @@ public class BaiduIndexService {
      *      + collectionToList
      */
     public static ChromeDriver loadBaiduIndexPageByWebDriver(String query){
+        logPrefix = "[BaiduIndexService.loadBaiduIndexPageByWebDriver] ";
         //step1 生成目标查询链接
         String queryMainUrl = "http://index.baidu.com/v2/main/index.html#/trend/"+ RequestUtil.urlEncode(query)+"?words="+RequestUtil.urlEncode(query);//queryMainUrl：百度指数查询后的(结果)主页
         //step2 获取已经过初始化的 WebDriver (默认：ChromeDriver)
@@ -109,7 +116,7 @@ public class BaiduIndexService {
         RequestUtil.addCookiesForWebDriver(webDriver,cookies);
 
         String currentUrl = webDriver.getCurrentUrl();//获取当前webDriver所处的url
-        System.out.println("now url:\n"+currentUrl);//just for test
+        logger.info(logPrefix+"now url:\n"+currentUrl);//just for test
         //step5 判断当前是否处于百度指数的结果页
         if(currentUrl.startsWith(indexUrl)){//当前页面是首页Url（即 要求登录）
             //step5.1 模拟登陆
@@ -119,12 +126,12 @@ public class BaiduIndexService {
                 //方式一 再次【重新】请求 queryMainUrl
                 webDriver.get(queryMainUrl);
                 webDriver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);//隐式等待
-                System.out.println("[#loadBaiduIndexPageByWebDriver] now url:\n"+currentUrl);//just for test
+                logger.info(logPrefix+"now url:\n"+currentUrl);//just for test
                 //方式二 在当前所处的百度指数首页中模拟输入我们要查询的关键词，将会跳转到 queryMainUrl 页面
             }
         } else {//第一次请求便已成功获取到百度指数页(queryMainUrl)
         }
-        System.out.println("now url:\n"+currentUrl);//just for test
+        logger.info(logPrefix+"now url:\n"+currentUrl);//just for test
 //        System.out.print(webDriver.findElement(By.cssSelector("html")).getText());//just for test
 //        webDriver.quit();//退出webDriver浏览器
         webDriver.navigate().refresh();//刷新一次
@@ -132,6 +139,7 @@ public class BaiduIndexService {
     }
 
     public static List<BaiduIndex> resolveBaiduIndexValues(String query){
+        logPrefix ="[BaiduIndexService.resolveBaiduIndexValues] ";
         List<BaiduIndex> baiduIndexs = new ArrayList<BaiduIndex>();
         //step 1 加载百度指数的查询数据页
         ChromeDriver webDriver = (ChromeDriver) BaiduIndexService.loadBaiduIndexPageByWebDriver(query);//向下转型回 ChromeDriver,否则WebDriver没有执行JS脚本的方法
@@ -145,7 +153,7 @@ public class BaiduIndexService {
             webDriver.executeScript(jsCode);
         } catch (Exception e){
             e.printStackTrace();
-            System.err.println("[BaiduIndex.resolveBaiduIndexValues] Fail to execute javascript code!");
+            logger.warning(logPrefix+"Fail to execute javascript code!");
             return baiduIndexs;//size:0
         }
 
@@ -160,11 +168,12 @@ public class BaiduIndexService {
                 //step 6 通过jackson将json字符串转为 Java (数组)对象
                 baiduIndexs = mapper.readValue(baiduIndexsJsonStr, new TypeReference<List<BaiduIndex>>() {});
             } else {
-                System.err.println("[BaiduIndex.resolveBaiduIndexValues] baiduIndexsJsonStr is null!");
+                logger.warning(logPrefix+"baiduIndexsJsonStr is null!");
                 return baiduIndexs;//size:0
             }
         } catch (IOException e) {
             e.printStackTrace();
+            logger.warning(logPrefix+"baiduIndexsJsonStr:"+baiduIndexsJsonStr);
         }
 
 //        System.out.println("[BaiduIndex#resolveBaiduIndexValues] jsCode:\n"+jsCode+"\n");//test

@@ -25,7 +25,6 @@ public class BaiduSpiderController {
     private static final Logger logger = Logger.getLogger(BaiduSpiderController.class.getName());
 
     //日志前缀字符串,方便通过日志定位程序
-    //不可设置为static，否则在多线程环境下使用本字段，一定会出现错误。
     protected String logPrefix = null;
 
     /**
