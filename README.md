@@ -3,6 +3,7 @@
 ## 当前版本(Version):
 + 1.0.1
     + publish datetime:2019-05-16 15:23
+
 ## 基本原理(Basic Principle)
 + 基本原理
     + 通过模拟鼠标滑动来解析百度指数网页的数据，存放于HTML页面中
@@ -14,6 +15,7 @@
 + 本脚本仅支持 IE8+的浏览器
 + 优先支持 Chrome 浏览器
 + 针对不同电脑终端的屏幕尺寸，其(resolveBaiduIndexByJs.js)的鼠标坐标参数需要自行计算
++ 项目特色：基本原理的实现过程即已提供了一种新的爬虫思路。
 
 ## 依赖项(Dependency)
 + 安装浏览器(推荐：Chrome)
@@ -26,6 +28,9 @@
 + 从本项目中下载该类中import所需要其他依赖类
 
 ## 测试(Test)
++ [视频演示链接:百度网盘]
+    + link: [https://pan.baidu.com/s/1iQbWHfT5_SKA3omK9nFgYg](https://pan.baidu.com/s/1iQbWHfT5_SKA3omK9nFgYg)
+    + code: 5gpi
 ``` java
     @Test
     public  void resolveBaiduIndexValuesTest() {
