@@ -1,0 +1,44 @@
+server:
+  port: 9090
+  servlet:
+      contextPath: /baiduIndex # 开发环境>项目名
+#  tomcat:
+#    uri-encoding: UTF-8
+
+spring:
+  profiles:
+    active: dev
+#  datasource: # database configuration
+#    url : jdbc:mysql://xxxx:3306/xxxxDb?useSSL=false&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false
+#    username : xxxx
+#    password : xxxx
+#    driver-class-name: com.mysql.jdbc.Driver
+#  jpa:
+#    database : MYSQL
+#    show-sql : false  # 在控制台可以看到SQL语句
+#    hibernate:
+#      ddl-auto : update # update create create-drop validate
+#      naming-strategy : org.hibernavedNamingStrategy
+#      dialect : org.hibernate.dialect.MySQL5InnoDBDialect
+#      format_sql: true # SQL字段类型转换格式化
+  mvc: # SpringMVC
+    view: # 定位模板的目录
+      prefix: classpath:/templates/  # 模板引擎thymeleaf-默认目录：src/main/resources/templates/
+      suffix: .html # 返回页面的默认后缀格式
+  devtools:
+    restart:
+      additional-path: src/main/java #添加哪个目录的文件需要restart
+#      exclude: static/**,public/**
+
+# 关闭Application
+endpoints:
+  shutdown:
+    enabled: true #启用shutdown
+    sensitive: false #禁用密码验证
+
+
+#### 用户自定义
+file:
+  staticAccessRootPath: /public/**
+  staticRealRootPath: /home/ubuntu/forget-note-words/file/public/
+##  staticRealRootPath: C:/Users/千千寰宇/Desktop/public/
