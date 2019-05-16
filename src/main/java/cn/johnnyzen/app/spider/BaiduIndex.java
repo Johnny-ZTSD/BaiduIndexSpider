@@ -1,6 +1,7 @@
 package cn.johnnyzen.app.spider;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @IDE: Created by IntelliJ IDEA.
@@ -24,6 +25,12 @@ public class BaiduIndex {
      * 百度指数值
      */
     private int indexValue;
+
+    public BaiduIndex(String keyword, Calendar date, int indexValue) {
+        this.keyword = keyword;
+        this.date = date;
+        this.indexValue = indexValue;
+    }
 
     public String getKeyword() {
         return keyword;
@@ -51,10 +58,10 @@ public class BaiduIndex {
 
     @Override
     public String toString() {
-        return "HousePrice{" +
-                "\nkeyword='" + keyword + '\'' +
-                ",\n date=" + date +
-                ",\n indexValue=" + indexValue +
-                "}";
+        return "\nBaiduIndex{" +
+                "\n\tkeyword='" + keyword + '\'' +
+                ",\n\tdate=" + date +
+                ",\n\tindexValue=" + indexValue +
+                "\n}";
     }
 }
