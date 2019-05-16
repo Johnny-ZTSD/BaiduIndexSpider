@@ -10,10 +10,23 @@
  *		+ 4.被授权人可根据程式的需要修改授权条款为适当的内容。
         + 5.被授权人义务：【在软件和软件的所有副本中都必须包含版权声明和许可声明】。
  * @author johnny zen
- * @github https://github.com/Johnny-ZTSD
+ * @github https://github.com/Johnny-ZTSD/BaiduIndexSpider
  * @email johnnyztsd@gmail.com
  * @publishDate 2019-05-16 12:52:02
  * @notice
+ *      + [注意事项] 不同情境下使用本js的一些注意事项
+ *          + 在WebDriver(Java or Python)进行本js脚本注入执行时的推荐环境
+ *              + 基于PC电脑(台式 or 笔记本)
+ *              + WebDriver选择ChromeDriver
+ *              + 浏览器:Chrome (IE8+)
+ *          + 直接copy 本js 进浏览器中试运行
+ *              + 基于PC电脑(台式 or 笔记本)
+ *              + 浏览器:Chrome (IE8+)
+ *              + 将浏览器窗口最大化
+ *              + 执行本js前，请将当前所处的【右侧滚动条】放置于【屏幕的最顶部】
+ *                  + 即 不要让鼠标滑动到页面底部去，否则很可能会执行失败
+ *              + 不同尺寸的电脑，需要更改BaiduIndexTask中的鼠标坐标参数
+ *          +
  *      + 针对上一版本进行改进
  *          + 按照完全面向对象的程序设计方法将脚本模块化
  *          + 含 Point,Mouse,BaiduIndex,BaiduIndexTask 四个类
