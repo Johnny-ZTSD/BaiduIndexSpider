@@ -21,11 +21,11 @@
     + 安装完成后修改[BrowserDriverSpiderUtil.java](https://github.com/Johnny-ZTSD/BaiduIndexSpider/blob/master/src/main/java/cn/johnnyzen/util/spider/BrowserDriverSpiderUtil.java)中属性systemPropertyValueOfBrowser的WebDriver.exe的存放路径
     + [注意] 最好是安装与浏览器版本相对应/兼容的 WebDriver
 
-## 使用方式(Using Way)
+## 项目使用方式(Method of use)
 + 从本项目中下载核心[BaiduIndexService.java](https://github.com/Johnny-ZTSD/BaiduIndexSpider/blob/master/src/main/java/cn/johnnyzen/app/spider/BaiduIndexService.java)类
 + 从本项目中下载该类中import所需要其他依赖类
 
-## 测试Demo
+## 测试(Test)
 ``` java
     @Test
     public  void resolveBaiduIndexValuesTest() {
